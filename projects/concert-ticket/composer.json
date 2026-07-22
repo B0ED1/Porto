@@ -1,0 +1,11 @@
+{
+    "name": "webkali/musicfest-crud",
+    "description": "Music Festival CRUD Web App dengan Supabase",
+    "require": {
+        "php": ">=8.0",
+        "ext-pdo": "*",
+        "ext-pdo_pgsql": "*",
+        "ext-pgsql": "*",
+        "phpmailer/phpmailer": "^7.1"
+    }
+}

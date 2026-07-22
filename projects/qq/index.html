@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>BeatPulse - Interactive Web Music Game</title>
+  <meta name="description" content="Audio-visual rhythm game & real-time music visualizer powered by Web Audio API and HTML5 Canvas.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app-container">
+    <!-- Top Back Navigation -->
+    <div class="top-nav-bar">
+      <a href="../../index.html" class="back-home-btn">← Kembali ke Portfolio</a>
+    </div>
+
+    <!-- Main Game Canvas -->
+    <canvas id="game-canvas"></canvas>
+
+    <!-- Main Menu Overlay -->
+    <div id="menu-screen" class="ui-screen">
+      <div class="glass-panel">
+        <h1 class="title-clean">BEATPULSE</h1>
+        <p class="subtitle">Interactive Music Player & Aesthetic Rhythm Game</p>
+
+        <!-- Mode Selection -->
+        <div class="mode-container">
+          <div class="mode-card selected" data-mode="CATCHER" id="mode-catcher-card">
+            <div class="mode-header">
+              <div class="mode-icon-wrapper">🎯</div>
+              <div>
+                <h3 class="mode-title">Beat Catcher</h3>
+                <span style="font-size: 0.75rem; color: var(--accent-purple); font-family: var(--font-heading); font-weight: 700;">CASUAL / CHILL</span>
+              </div>
+            </div>
+            <p class="mode-desc">Tangkap orb ritme yang meluncur ke lingkaran pusat. Gunakan panah keyboard atau D-Pad HP.</p>
+          </div>
+
+          <div class="mode-card" data-mode="RUNNER" id="mode-runner-card">
+            <div class="mode-header">
+              <div class="mode-icon-wrapper" style="border-color: var(--accent-teal); background: rgba(45, 212, 191, 0.12);">⚡</div>
+              <div>
+                <h3 class="mode-title">Rhythm Runner</h3>
+                <span style="font-size: 0.75rem; color: var(--accent-teal); font-family: var(--font-heading); font-weight: 700;">ARCADE 3-LANES</span>
+              </div>
+            </div>
+            <p class="mode-desc">Mainkan 3 jalur vertikal. Tekan <code>A</code> <code>S</code> <code>D</code> atau ketuk 3 Tombol Pad HP.</p>
+          </div>
+        </div>
+
+        <!-- Audio Selector Panel -->
+        <div class="audio-selector" id="drop-zone">
+          <div class="section-label">🎵 PILIH LAGU / INSTRUMEN:</div>
+
+          <!-- Built-in Synth Lo-Fi Presets Chips -->
+          <div class="quick-trending-box">
+            <div class="song-chip active" data-preset="lofi">☕ Lo-Fi Chill Hop</div>
+            <div class="song-chip" data-preset="cyberpulse">⚡ Cyberpulse Synthwave</div>
+            <div class="song-chip" data-preset="retrobass">🎸 Retro Electro Bass</div>
+            <div class="song-chip" data-preset="midnight">🌊 Midnight Lofi Study</div>
+            <div class="song-chip" data-preset="edm">🔥 EDM Beat Drop</div>
+          </div>
+
+          <!-- Search Bar -->
+          <div class="search-input-box" style="margin-top: 14px;">
+            <input type="text" id="song-search-input" placeholder="🔍 Cari Lagu / Audio Online (cth: Lofi, Electro, Synth)...">
+            <button id="song-search-btn" class="search-btn">Cari</button>
+          </div>
+
+          <!-- Search Results Container -->
+          <div id="search-results-list" class="search-results-container"></div>
+
+          <!-- Upload Box & SFX -->
+          <div class="upload-box" style="margin-top: 16px;">
+            <label for="audio-file-input" class="upload-btn-label">
+              📁 Upload MP3 Sendiri (Full 00:00)
+            </label>
+            <input type="file" id="audio-file-input" accept="audio/*">
+
+            <button id="sfx-toggle-btn" class="sfx-pill">
+              🔊 Hit Percussion SFX: ON
+            </button>
+          </div>
+        </div>
+
+        <!-- Start Button -->
+        <button id="start-btn" class="btn-primary">PLAY GAME</button>
+      </div>
+    </div>
+
+    <!-- HUD Overlay (In-Game) -->
+    <div id="hud-overlay" class="hidden">
+      <div class="hud-top">
+        <div class="score-box">
+          <div class="score-label">SCORE</div>
+          <div class="score-value" id="hud-score">0</div>
+        </div>
+
+        <div class="combo-box">
+          <div class="combo-count" id="hud-combo">0</div>
+          <div class="combo-multiplier" id="hud-multiplier">1x</div>
+        </div>
+      </div>
+
+      <!-- Rhythm Runner Key Guides (Top HUD) -->
+      <div id="lane-keys-overlay" class="lane-keys-overlay" style="display: none;">
+        <div class="key-badge">A / ◄</div>
+        <div class="key-badge">S / ▼</div>
+        <div class="key-badge">D / ►</div>
+      </div>
+
+      <!-- Mobile Touch Controls Overlays -->
+      <!-- Mode B: 3-Lane Touch Pads for Mobile HP -->
+      <div id="mobile-runner-touchpad" class="mobile-touch-container" style="display: none;">
+        <div class="mobile-touch-pad" data-lane="0">LANE 1</div>
+        <div class="mobile-touch-pad" data-lane="1" style="border-color: var(--accent-purple);">LANE 2</div>
+        <div class="mobile-touch-pad" data-lane="2" style="border-color: var(--accent-amber);">LANE 3</div>
+      </div>
+
+      <!-- Mode A: 4-Directional Touch D-Pad for Mobile HP -->
+      <div id="mobile-catcher-dpad" class="mobile-dpad-container" style="display: none;">
+        <div class="dpad-btn dpad-up" data-dir="ArrowUp">▲</div>
+        <div class="dpad-btn dpad-left" data-dir="ArrowLeft">◄</div>
+        <div class="dpad-btn dpad-right" data-dir="ArrowRight">►</div>
+        <div class="dpad-btn dpad-down" data-dir="ArrowDown">▼</div>
+      </div>
+
+      <div class="hud-bottom">
+        <div class="song-progress-container">
+          <div class="song-progress-bar" id="hud-progress-bar"></div>
+        </div>
+        <div class="song-title-hud" id="hud-track-title">☕ Lo-Fi Chill Hop</div>
+        <div class="controls-hint">Tekan <strong>[SPACEBAR]</strong> atau sentuh layar untuk Pause</div>
+      </div>
+    </div>
+
+    <!-- Pause Menu Overlay -->
+    <div id="pause-screen" class="ui-screen hidden">
+      <div class="glass-panel" style="max-width: 440px;">
+        <h2 style="font-family: var(--font-heading); font-size: 2.2rem; margin-bottom: 24px; color: var(--accent-purple);">GAME PAUSED</h2>
+        <button id="resume-btn" class="btn-primary" style="width: 100%; margin-bottom: 14px;">RESUME</button>
+        <button id="quit-btn" class="btn-secondary" style="width: 100%;">QUIT TO MENU</button>
+      </div>
+    </div>
+
+    <!-- Game Over / Results Screen -->
+    <div id="gameover-screen" class="ui-screen hidden">
+      <div class="glass-panel" style="max-width: 600px;">
+        <h2 class="title-clean" style="font-size: 2.8rem;">TRACK COMPLETED</h2>
+        <p id="highscore-notice" style="font-size: 1.1rem; margin-bottom: 24px;">High Score: 0</p>
+
+        <div style="font-size: 3.5rem; font-family: var(--font-heading); font-weight: 800; color: var(--accent-teal); margin-bottom: 24px;">
+          <span id="final-score">0</span>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="final-max-combo" style="color: var(--accent-amber);">0</div>
+            <div class="stat-name">MAX COMBO</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="final-perfect" style="color: var(--accent-teal);">0</div>
+            <div class="stat-name">PERFECT</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="final-great" style="color: var(--accent-blue);">0</div>
+            <div class="stat-name">GREAT</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="final-good" style="color: var(--accent-purple);">0</div>
+            <div class="stat-name">GOOD</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="final-miss" style="color: var(--accent-rose);">0</div>
+            <div class="stat-name">MISS</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <button id="replay-btn" class="btn-primary">PLAY AGAIN</button>
+          <button id="menu-btn" class="btn-secondary">MAIN MENU</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
