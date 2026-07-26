@@ -164,7 +164,7 @@ const galleryData = [
     title: 'Urban Lines',
     location: 'Sudut Perkotaan',
     category: 'Street Architecture',
-    caption: 'Siluet tiang dan bentangan kabel listrik perkotaan yang membentuk garis geometris estetik di bawah langit.'
+    caption: 'Siluet tiang dan bentangan kabel listrik pedesaan yang membentuk garis geometris estetik di bawah langit.'
   }
 ];
 
