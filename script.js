@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initProjectFilter();
+  initGalleryCarousel();
   initLightbox();
   initScrollObserver();
   initMobileMenu();
@@ -92,38 +93,100 @@ function initProjectFilter() {
 }
 
 /* ----------------------------------------------------
-   3. Photography Lightbox Modal
+   3. Photography Carousel & Lightbox Modal
 ---------------------------------------------------- */
 const galleryData = [
   {
-    src: 'assets/gallery/photo1.png',
-    title: 'Misty Alpine Peaks',
-    location: 'Mount Merbabu, Central Java',
-    category: 'Landscape',
-    caption: 'Cinematic sunset vista overlooking golden hour clouds and rugged mountain ridge.'
+    src: 'assets/gallery/Oh-Some!.JPEG',
+    title: 'Oh-Some!',
+    location: 'Shopping Spot',
+    category: 'Lifestyle',
+    caption: 'Dokumentasi visual suasana toko Oh-Some! yang ceria dengan pernak-pernik unik, warna-warni memikat, dan pencahayaan hangat.'
   },
   {
-    src: 'assets/gallery/photo2.png',
-    title: 'Cyber Twilight Metropolis',
-    location: 'Downtown Skyscraper District',
+    src: 'assets/gallery/Pict 1.JPEG',
+    title: 'Pict 1',
+    location: 'Yogyakarta',
+    category: 'Moment',
+    caption: 'Tangkapan momen autentik berharga dengan komposisi estetik dan suasana hangat yang berkesan.'
+  },
+  {
+    src: 'assets/gallery/flower.jpeg',
+    title: 'Flower Bloom',
+    location: 'Taman Bunga',
+    category: 'Nature',
+    caption: 'Keindahan kelopak bunga yang sedang bermekaran dengan detail tekstur alami dan nuansa warna yang menenangkan.'
+  },
+  {
+    src: 'assets/gallery/gataujuga.jpeg',
+    title: 'Aesthetic Mood',
+    location: 'Random Spot',
+    category: 'Visual Art',
+    caption: 'Sudut pandang visual kasual yang menangkap gradasi warna dan objek harian menjadi sebuah karya estetis.'
+  },
+  {
+    src: 'assets/gallery/gramed.jpeg',
+    title: 'Gramedia Corner',
+    location: 'Toko Buku Gramedia',
+    category: 'Urban Life',
+    caption: 'Suasana tenang di antara rak-rak buku Gramedia, menangkap momen kedamaian para pecinta literasi.'
+  },
+  {
+    src: 'assets/gallery/malio.jpeg',
+    title: 'Malioboro Street',
+    location: 'Malioboro, Yogyakarta',
     category: 'Cityscape',
-    caption: 'Neon reflections and sleek urban geometry captured during twilight hour.'
+    caption: 'Atmosfer jalanan bersejarah Malioboro Jogja dengan deretan lampu hangat dan jejak kebudayaan lokal.'
   },
   {
-    src: 'assets/gallery/photo3.png',
-    title: 'Lantern Alleyway',
-    location: 'Historical Old Town District',
-    category: 'Street',
-    caption: 'Candid nocturnal street life lit by warm lanterns and dramatic ambient shadows.'
+    src: 'assets/gallery/pantai.jpeg',
+    title: 'Pantai Horizon',
+    location: 'Pesisir Pantai',
+    category: 'Nature & Sea',
+    caption: 'Hamparan lanskap pantai indah dengan deburan ombak dan garis horizon yang menyejukkan jiwa.'
   },
   {
-    src: 'assets/gallery/photo4.png',
-    title: 'Monolithic Curves',
-    location: 'Contemporary Art Center',
-    category: 'Architecture',
-    caption: 'Minimalist perspective exploring leading lines and glass facade reflections.'
+    src: 'assets/gallery/porto.jpg',
+    title: 'Porto Scenic',
+    location: 'Scenic Point',
+    category: 'Photography',
+    caption: 'Pengambilan gambar sudut luas yang memperlihatkan komposisi simetris dan keindahan alam sekitarnya.'
+  },
+  {
+    src: 'assets/gallery/sky.jpeg',
+    title: 'Golden Sky',
+    location: 'Open Horizon',
+    category: 'Sky & Atmosphere',
+    caption: 'Keindahan panorama langit di sore hari dengan paduan awan dan gradasi cahaya senja yang memukau.'
+  },
+  {
+    src: 'assets/gallery/tiang.jpeg',
+    title: 'Urban Lines',
+    location: 'Sudut Perkotaan',
+    category: 'Street Architecture',
+    caption: 'Siluet tiang dan bentangan kabel listrik perkotaan yang membentuk garis geometris estetik di bawah langit.'
   }
 ];
+
+function initGalleryCarousel() {
+  const container = document.getElementById('galleryContainer');
+  const scrollLeftBtn = document.getElementById('galleryScrollLeft');
+  const scrollRightBtn = document.getElementById('galleryScrollRight');
+
+  if (!container) return;
+
+  if (scrollLeftBtn) {
+    scrollLeftBtn.addEventListener('click', () => {
+      container.scrollBy({ left: -340, behavior: 'smooth' });
+    });
+  }
+
+  if (scrollRightBtn) {
+    scrollRightBtn.addEventListener('click', () => {
+      container.scrollBy({ left: 340, behavior: 'smooth' });
+    });
+  }
+}
 
 let currentImageIndex = 0;
 

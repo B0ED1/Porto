@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>M Arif Budi Prakoso | Informatics Student @ UMBY & Photographer</title>
+  <title>Protofolio Arif</title>
 
   <!-- SEO Meta Tags -->
   <meta name="description"
@@ -35,13 +35,18 @@
       <!-- Brand Logo -->
       <a href="#" class="flex items-center gap-3 group">
         <div
-          class="w-10 h-10 rounded-xl bg-gradient-calm flex items-center justify-center text-white font-mono font-bold text-lg shadow-md group-hover:scale-105 transition-transform">
-          AP
+          class="w-10 h-10 rounded-xl bg-gradient-calm flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform"
+          title="M Arif Budi Prakoso - Informatics & Photography">
+          <svg class="w-5 h-5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.5 11l2 1.5-2 1.5m3.5 1.5h-2" />
+          </svg>
         </div>
         <div class="flex flex-col">
           <span class="font-bold text-base tracking-tight text-main group-hover:text-accent-sage transition-colors">M
             Arif Budi Prakoso</span>
-          <span class="text-xs font-mono text-sub">Informatics Student @ UMBY</span>
+          <span class="text-xs font-mono text-sub">Informatics Student at UMBY</span>
         </div>
       </a>
 
@@ -118,7 +123,7 @@
             class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-pill text-xs font-mono text-accent-sage font-medium">
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-ping"></span>
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 -ml-5"></span>
-            <span>🎓 Student @ Universitas Mercu Buana Yogyakarta</span>
+            <span>🎓 Student at Universitas Mercu Buana Yogyakarta</span>
           </div>
 
           <!-- Main Title & Headline -->
@@ -130,7 +135,7 @@
               Hello! I'm <strong class="text-main font-semibold">M Arif Budi Prakoso</strong>, an active Informatics
               Engineering student at <strong class="text-main font-semibold">Universitas Mercu Buana
                 Yogyakarta</strong>. I am continuously learning software engineering, database architecture (PL/SQL,
-              Oracle DB), web development, and creative visual photography.
+              Oracle DB), web development, and photography.
             </p>
           </div>
 
@@ -167,7 +172,7 @@
             </div>
             <div>
               <div class="text-2xl lg:text-3xl font-extrabold font-mono text-accent-sage">Active</div>
-              <div class="text-xs text-sub font-mono mt-1">Learner & Creator</div>
+              <div class="text-xs text-sub font-mono mt-1">Learner</div>
             </div>
           </div>
 
@@ -492,81 +497,135 @@
   </section>
 
   <!-- Photography & Visual Gallery Section -->
-  <section id="gallery" class="py-24 relative bg-secondary-custom">
+  <section id="gallery" class="py-24 relative bg-secondary-custom overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
-        <h2 class="text-xs font-mono uppercase tracking-widest text-accent-sage font-bold">Visual Perspective</h2>
-        <p class="text-3xl sm:text-4xl font-extrabold tracking-tight text-main">Photography Showcase</p>
-        <p class="text-sub text-sm sm:text-base">Exploring landscapes, urban cityscapes, and street composition. Click
-          any image for fullscreen interactive lightbox.</p>
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+        <div class="space-y-3">
+          <h2 class="text-xs font-mono uppercase tracking-widest text-accent-sage font-bold">Visual Perspective</h2>
+          <p class="text-3xl sm:text-4xl font-extrabold tracking-tight text-main">Photography Showcase</p>
+          <p class="text-sub text-sm max-w-xl">Eksplorasi visual dan momen terbaik. Klik foto untuk melihat detail penjelasan lengkap.</p>
+        </div>
+
+        <!-- Carousel Navigation Controls -->
+        <div class="flex items-center gap-3">
+          <button id="galleryScrollLeft" aria-label="Scroll Left"
+            class="w-11 h-11 rounded-xl glass-pill flex items-center justify-center text-main hover:text-accent-sage hover:border-emerald-600/40 transition-all shadow-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button id="galleryScrollRight" aria-label="Scroll Right"
+            class="w-11 h-11 rounded-xl glass-pill flex items-center justify-center text-main hover:text-accent-sage hover:border-emerald-600/40 transition-all shadow-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
       </div>
 
-      <!-- Masonry Gallery Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Horizontal Scrolling Gallery Carousel -->
+      <div id="galleryContainer"
+        class="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-6 px-1 -mx-1 scroll-smooth">
 
         <!-- Gallery Item 1 -->
-        <div class="gallery-item group relative rounded-2xl overflow-hidden cursor-pointer glass-card h-80">
-          <img src="assets/gallery/photo1.png" alt="Photography Showcase 1"
-            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity">
-          </div>
-
-          <div class="absolute bottom-6 left-6 right-6 space-y-1">
-            <span class="text-[10px] font-mono text-emerald-300 uppercase tracking-wider">Landscape</span>
-            <h3 class="text-base font-bold text-white group-hover:text-emerald-300 transition-colors">Misty Alpine Peaks
-            </h3>
-            <p class="text-xs text-slate-300 font-mono">Mount Merbabu, Central Java</p>
+        <div class="gallery-item flex-none w-72 sm:w-80 group relative rounded-2xl overflow-hidden cursor-pointer glass-card h-96 snap-start">
+          <img src="assets/gallery/Oh-Some!.JPEG" alt="Oh-Some!"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <h3 class="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">Oh-Some!</h3>
           </div>
         </div>
 
         <!-- Gallery Item 2 -->
-        <div class="gallery-item group relative rounded-2xl overflow-hidden cursor-pointer glass-card h-80">
-          <img src="assets/gallery/photo2.png" alt="Photography Showcase 2"
-            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity">
-          </div>
-
-          <div class="absolute bottom-6 left-6 right-6 space-y-1">
-            <span class="text-[10px] font-mono text-amber-300 uppercase tracking-wider">Cityscape</span>
-            <h3 class="text-base font-bold text-white group-hover:text-amber-300 transition-colors">Cyber Twilight
-              Metropolis</h3>
-            <p class="text-xs text-slate-300 font-mono">Skyscraper District</p>
+        <div class="gallery-item flex-none w-72 sm:w-80 group relative rounded-2xl overflow-hidden cursor-pointer glass-card h-96 snap-start">
+          <img src="assets/gallery/Pict 1.JPEG" alt="Pict 1"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <h3 class="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">Pict 1</h3>
           </div>
         </div>
 
         <!-- Gallery Item 3 -->
-        <div class="gallery-item group relative rounded-2xl overflow-hidden cursor-pointer glass-card h-80">
-          <img src="assets/gallery/photo3.png" alt="Photography Showcase 3"
-            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity">
-          </div>
-
-          <div class="absolute bottom-6 left-6 right-6 space-y-1">
-            <span class="text-[10px] font-mono text-amber-300 uppercase tracking-wider">Street</span>
-            <h3 class="text-base font-bold text-white group-hover:text-amber-300 transition-colors">Lantern Alleyway
-            </h3>
-            <p class="text-xs text-slate-300 font-mono">Historical Old Town</p>
+        <div class="gallery-item flex-none w-72 sm:w-80 group relative rounded-2xl overflow-hidden cursor-pointer glass-card h-96 snap-start">
+          <img src="assets/gallery/flower.jpeg" alt="Flower Bloom"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <h3 class="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">Flower Bloom</h3>
           </div>
         </div>
 
         <!-- Gallery Item 4 -->
-        <div class="gallery-item group relative rounded-2xl overflow-hidden cursor-pointer glass-card h-80">
-          <img src="assets/gallery/photo4.png" alt="Photography Showcase 4"
-            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity">
+        <div class="gallery-item flex-none w-72 sm:w-80 group relative rounded-2xl overflow-hidden cursor-pointer glass-card h-96 snap-start">
+          <img src="assets/gallery/gataujuga.jpeg" alt="Aesthetic Mood"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <h3 class="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">Aesthetic Mood</h3>
           </div>
+        </div>
 
-          <div class="absolute bottom-6 left-6 right-6 space-y-1">
-            <span class="text-[10px] font-mono text-teal-300 uppercase tracking-wider">Architecture</span>
-            <h3 class="text-base font-bold text-white group-hover:text-teal-300 transition-colors">Monolithic Curves
-            </h3>
-            <p class="text-xs text-slate-300 font-mono">Contemporary Art Center</p>
+        <!-- Gallery Item 5 -->
+        <div class="gallery-item flex-none w-72 sm:w-80 group relative rounded-2xl overflow-hidden cursor-pointer glass-card h-96 snap-start">
+          <img src="assets/gallery/gramed.jpeg" alt="Gramedia Corner"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <h3 class="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">Gramedia Corner</h3>
+          </div>
+        </div>
+
+        <!-- Gallery Item 6 -->
+        <div class="gallery-item flex-none w-72 sm:w-80 group relative rounded-2xl overflow-hidden cursor-pointer glass-card h-96 snap-start">
+          <img src="assets/gallery/malio.jpeg" alt="Malioboro Street"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <h3 class="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">Malioboro Street</h3>
+          </div>
+        </div>
+
+        <!-- Gallery Item 7 -->
+        <div class="gallery-item flex-none w-72 sm:w-80 group relative rounded-2xl overflow-hidden cursor-pointer glass-card h-96 snap-start">
+          <img src="assets/gallery/pantai.jpeg" alt="Pantai Horizon"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <h3 class="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">Pantai Horizon</h3>
+          </div>
+        </div>
+
+        <!-- Gallery Item 8 -->
+        <div class="gallery-item flex-none w-72 sm:w-80 group relative rounded-2xl overflow-hidden cursor-pointer glass-card h-96 snap-start">
+          <img src="assets/gallery/porto.jpg" alt="Porto Scenic"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <h3 class="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">Porto Scenic</h3>
+          </div>
+        </div>
+
+        <!-- Gallery Item 9 -->
+        <div class="gallery-item flex-none w-72 sm:w-80 group relative rounded-2xl overflow-hidden cursor-pointer glass-card h-96 snap-start">
+          <img src="assets/gallery/sky.jpeg" alt="Golden Sky"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <h3 class="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">Golden Sky</h3>
+          </div>
+        </div>
+
+        <!-- Gallery Item 10 -->
+        <div class="gallery-item flex-none w-72 sm:w-80 group relative rounded-2xl overflow-hidden cursor-pointer glass-card h-96 snap-start">
+          <img src="assets/gallery/tiang.jpeg" alt="Urban Lines"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <h3 class="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">Urban Lines</h3>
           </div>
         </div>
 
