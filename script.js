@@ -105,10 +105,10 @@ const galleryData = [
   },
   {
     src: 'assets/gallery/Pict 1.JPEG',
-    title: 'Pict 1',
-    location: 'Yogyakarta',
-    category: 'Moment',
-    caption: 'Tangkapan momen autentik berharga dengan komposisi estetik dan suasana hangat yang berkesan.'
+    title: 'Rural Morning Dawn',
+    location: 'Countryside',
+    category: 'Landscape',
+    caption: 'Suasana pedesaan di pagi hari yang tenang, diselimuti kabut segar dan kehangatan cahaya matahari fajar yang menyejukkan.'
   },
   {
     src: 'assets/gallery/flower.jpeg',
